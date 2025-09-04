@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "1",
+    "name": "Mumbai Central",
+    "code": "MMCT",
+    "type": "railway",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "displayName": "Mumbai Central Railway Station",
+    "displayWithType": "Mumbai Central Railway Station, Mumbai",
+    "coordinates": {
+      "latitude": 18.969,
+      "longitude": 72.8205
+    },
+    "services": {
+      "operatingHours": {
+        "start": "05:00",
+        "end": "23:00"
+      }
+    },
+    "popularity": 95
+  },
+  {
+    "_id": "2",
+    "name": "Chhatrapati Shivaji Maharaj International Airport",
+    "code": "BOM",
+    "type": "airport",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "displayName": "Chhatrapati Shivaji Maharaj International Airport",
+    "displayWithType": "Chhatrapati Shivaji Maharaj International Airport, Mumbai",
+    "coordinates": {
+      "latitude": 19.0896,
+      "longitude": 72.8656
+    },
+    "services": {
+      "operatingHours": {
+        "start": "04:00",
+        "end": "24:00"
+      }
+    },
+    "popularity": 95
+  },
+  {
+    "_id": "3",
+    "name": "New Delhi Railway Station",
+    "code": "NDLS",
+    "type": "railway",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "displayName": "New Delhi Railway Station",
+    "displayWithType": "New Delhi Railway Station, New Delhi",
+    "coordinates": {
+      "latitude": 28.6434,
+      "longitude": 77.2197
+    },
+    "services": {
+      "operatingHours": {
+        "start": "04:00",
+        "end": "24:00"
+      }
+    },
+    "popularity": 100
+  },
+  {
+    "_id": "4",
+    "name": "Indira Gandhi International Airport",
+    "code": "DEL",
+    "type": "airport",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "displayName": "Indira Gandhi International Airport",
+    "displayWithType": "Indira Gandhi International Airport, New Delhi",
+    "coordinates": {
+      "latitude": 28.5562,
+      "longitude": 77.1
+    },
+    "services": {
+      "operatingHours": {
+        "start": "03:00",
+        "end": "24:00"
+      }
+    },
+    "popularity": 100
+  }
+]

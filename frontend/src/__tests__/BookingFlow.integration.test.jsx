@@ -165,7 +165,9 @@ const mockApiResponses = {
 // Setup fetch mock
 const setupFetchMock = () => {
   fetch.mockImplementation((url, options) => {
-    const endpoint = url.replace('http://localhost:5000', '');
+    // Use environment variable for base URL
+    const baseUrl = import.meta.env.VITE_API_URL;
+    const endpoint = url.replace(baseUrl, '');
     const response = mockApiResponses[endpoint];
     
     if (response) {
@@ -423,7 +425,8 @@ describe('Booking Flow Integration', () => {
         });
       }
       
-      const endpoint = url.replace('http://localhost:5000', '');
+      const baseUrl = import.meta.env.VITE_API_URL;
+      const endpoint = url.replace(baseUrl, '');
       const response = mockApiResponses[endpoint];
       
       if (response) {

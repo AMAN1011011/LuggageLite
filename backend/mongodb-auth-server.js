@@ -34,7 +34,18 @@ let client;
 
 async function connectToMongoDB() {
   try {
-    client = new MongoClient(MONGODB_URI);
+    // Parse MongoDB URI to check SSL configuration
+    const uri = MONGODB_URI;
+    console.log('🔗 Attempting to connect to MongoDB...');
+    console.log('📊 Connection string:', uri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')); // Hide credentials in logs
+    
+    // Try connection with current URI
+    client = new MongoClient(uri, {
+      serverSelectionTimeoutMS: 10000, // 10 seconds
+      connectTimeoutMS: 10000, // 10 seconds
+      socketTimeoutMS: 45000, // 45 seconds
+    });
+    
     await client.connect();
     db = client.db();
     console.log('✅ Connected to MongoDB successfully');
@@ -53,6 +64,23 @@ async function connectToMongoDB() {
     await seedStationsData();
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
+    
+    // Provide specific SSL troubleshooting information
+    if (error.message && error.message.includes('SSL') || error.message.includes('TLS')) {
+      console.error('\n🔧 SSL/TLS Troubleshooting:');
+      console.error('1. Check if your MongoDB Atlas cluster has SSL enabled');
+      console.error('2. Try adding ssl=false to your connection string if SSL is not supported');
+      console.error('3. Ensure your MongoDB user has proper permissions');
+      console.error('4. Check if your IP address is whitelisted in MongoDB Atlas');
+      console.error('\n💡 Try these connection string options:');
+      console.error('Option 1 (SSL enabled): mongodb+srv://user:pass@cluster.mongodb.net/db?ssl=true');
+      console.error('Option 2 (SSL disabled): mongodb+srv://user:pass@cluster.mongodb.net/db?ssl=false');
+      console.error('Option 3 (Minimal): mongodb+srv://user:pass@cluster.mongodb.net/db');
+    }
+    
+    console.error('\n📋 Current connection string (credentials hidden):');
+    console.error(MONGODB_URI.replace(/\/\/[^:]+:[^@]+@/, '//***:***@'));
+    
     process.exit(1);
   }
 }

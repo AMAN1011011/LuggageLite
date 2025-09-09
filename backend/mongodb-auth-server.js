@@ -19,7 +19,18 @@ const ALLOWED_ORIGINS = [
 ];
 
 function getCorsHeaders(origin) {
-  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  console.log('🔍 CORS Debug - Request Origin:', origin);
+  console.log('🔍 CORS Debug - Allowed Origins:', ALLOWED_ORIGINS);
+  
+  // Allow any Vercel domain or localhost
+  const isAllowedOrigin = ALLOWED_ORIGINS.includes(origin) || 
+                         (origin && origin.includes('vercel.app')) || 
+                         (origin && origin.includes('localhost'));
+  
+  const allowedOrigin = isAllowedOrigin ? origin : ALLOWED_ORIGINS[0];
+  
+  console.log('🔍 CORS Debug - Selected Origin:', allowedOrigin);
+  
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -1433,9 +1444,12 @@ async function handleCalculateDistance(req, res) {
 
 // Create server
 const server = http.createServer(async (req, res) => {
+  const origin = req.headers.origin || '';
+  console.log(`🌐 Request from origin: ${origin}`);
+  
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    const origin = req.headers.origin || '';
+    console.log('🔄 Handling CORS preflight request');
     const corsHeaders = getCorsHeaders(origin);
     res.writeHead(200, corsHeaders);
     res.end();
@@ -1445,7 +1459,6 @@ const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
   const method = req.method;
-  const origin = req.headers.origin || '';
 
   // Create a response wrapper that includes origin
   const sendResponseWithOrigin = (statusCode, data, message = '') => {

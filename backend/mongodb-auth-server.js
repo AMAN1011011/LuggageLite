@@ -15,7 +15,7 @@ const JWT_SECRET = process.env.JWT_SECRET || '34144872fecc102808461b95b340c37037
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://your-app-name.vercel.app' // Replace with your actual Vercel domain
+  'https://luggage-lite-jpu2.vercel.app' // Your actual Vercel domain
 ];
 
 function getCorsHeaders(origin) {
